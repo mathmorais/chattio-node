@@ -1,0 +1,1 @@
+class UserFriendAccept implements IUserFriendAcceptService {}
