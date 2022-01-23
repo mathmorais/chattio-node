@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import { IUserFriendRequestService } from "../../core/interfaces/IUserFriendRequestService";
+import { IUserFriendRequestDTO } from "../../core/dtos/IUserFriendRequestDTO";
+import { IUserFriendRequestService } from "../../core/interfaces/services/IUserFriendRequestService";
 import { handleVerifyToken } from "../utils/handleVerifyToken";
 
 export class UserFriendRequestController {
@@ -14,16 +15,14 @@ export class UserFriendRequestController {
       const [_, token] = req.headers.authorization!.split(" ");
 
       const userId = handleVerifyToken<{ aud: string }>(token).aud;
-      const friendId = req.body.uid;
-
-      console.log(userId, friendId);
+      const { friendId } = req.body as IUserFriendRequestDTO;
 
       await this.service.handleSendFriendRequest(userId, friendId);
 
-      return res.send({ code: "friendRequest.send" });
+      return res.json({ code: "friend.send" });
     } catch (err) {
-      const errorCode = err instanceof Error ? err.message : "error.invalid";
-      return res.status(400).send({ errorCode });
+      const errorCode = err instanceof Error ? err.message : "error.null";
+      return res.status(400).json({ errorCode });
     }
   };
 }

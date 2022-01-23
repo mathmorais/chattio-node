@@ -1,5 +1,6 @@
-import { IUser } from "../../core/interfaces/IUser";
-import { IUserFriendRequestService } from "../../core/interfaces/IUserFriendRequestService";
+import { IUserFriendRequestDTO } from "../../core/dtos/IUserFriendRequestDTO";
+import { IUser } from "../../core/interfaces/entities/IUser";
+import { IUserFriendRequestService } from "../../core/interfaces/services/IUserFriendRequestService";
 import { redisClient } from "../initializers/redis";
 import { UserModel } from "../models/User";
 import { handleGetCachedUser } from "../utils/handleGetCachedUser";
@@ -20,34 +21,42 @@ export class UserFriendRequestService implements IUserFriendRequestService {
     );
   }
 
+  /**
+   * Maybe, in the future...
+   * I'll refactor this part of code
+   */
+
   async handleSendFriendRequest(
     userId: string,
     friendId: string
   ): Promise<void> {
-    if (userId === friendId) {
-      throw new Error("friend.invalid");
-    }
-
     const { friends } = await handleGetCachedUser(userId);
-
     if (!this.handleCheckAlreadyFriend(friends, friendId)) {
-      const updatedUser = await UserModel.findByIdAndUpdate(
-        userId,
-        {
-          $push: { friends: { user: friendId } },
-        },
-        { new: true }
-      );
+      try {
+        if (userId === friendId) throw new Error();
 
-      const updatedFriend = await UserModel.findByIdAndUpdate(
-        friendId,
-        {
-          $push: { friends: { user: userId } },
-        },
-        { new: true }
-      );
+        const updatedUser = await UserModel.findByIdAndUpdate(
+          userId,
+          {
+            $push: { friends: { user: friendId } },
+          },
+          { new: true }
+        );
 
-      this.handleSyncData(updatedUser!, updatedFriend!);
+        const updatedFriend = await UserModel.findByIdAndUpdate(
+          friendId,
+          {
+            $push: { friendRequests: { user: userId } },
+          },
+          { new: true }
+        );
+
+        if (updatedUser && updatedFriend) {
+          this.handleSyncData(updatedUser, updatedFriend);
+        }
+      } catch (err) {
+        throw new Error("friend.notExist");
+      }
     } else {
       throw new Error("friend.alreadyAdded");
     }
