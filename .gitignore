@@ -31,5 +31,6 @@ coverage
 .env.dev
 .env.prod
 
-
+# Redis backup file
+dump.rdb
 
