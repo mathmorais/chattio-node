@@ -1,0 +1,1 @@
+{"version":3,"file":"handleVerifyToken.js","sourceRoot":"","sources":["../../../../lib/main/utils/handleVerifyToken.ts"],"names":[],"mappings":";;;;;;AAAA,8DAA+B;AAC/B,oEAAmE;AAE5D,IAAM,iBAAiB,GAAG,UAAI,KAAa;IAChD,OAAO,sBAAG,CAAC,MAAM,CACf,KAAK,EACL,uCAAkB,CAAC,SAAS,EAC5B,uCAAkB,CAAC,aAAa,CAC5B,CAAC;AACT,CAAC,CAAC;AANW,QAAA,iBAAiB,qBAM5B"}

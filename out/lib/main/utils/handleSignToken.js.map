@@ -1,0 +1,1 @@
+{"version":3,"file":"handleSignToken.js","sourceRoot":"","sources":["../../../../lib/main/utils/handleSignToken.ts"],"names":[],"mappings":";;;;;;AAAA,iDAAiD;AACjD,8DAA+B;AAC/B,oEAAmE;AAE5D,IAAM,eAAe,GAAG,UAC7B,OAAsC;IAAtC,wBAAA,EAAA,YAAsC;IAEtC,OAAO,sBAAG,CAAC,IAAI,CACb,OAAO,EACP,uCAAkB,CAAC,UAAU,EAC7B,uCAAkB,CAAC,WAAW,CAC/B,CAAC;AACJ,CAAC,CAAC;AARW,QAAA,eAAe,mBAQ1B"}

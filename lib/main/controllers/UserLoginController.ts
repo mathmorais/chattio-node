@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { IUserLoginService } from "../../core/interfaces/IUserLoginService";
+import { IUserLoginService } from "../../core/interfaces/services/IUserLoginService";
 
 export class UserLoginController {
   service: IUserLoginService;

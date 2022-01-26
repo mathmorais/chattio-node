@@ -4,6 +4,7 @@ import { IUser } from "../../core/interfaces/entities/IUser";
 
 const UserSchema = new Schema({
   fullName: String,
+  friendId: String,
   email: String,
   password: String,
   friendRequests: [

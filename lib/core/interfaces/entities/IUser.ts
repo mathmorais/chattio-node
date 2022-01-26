@@ -3,6 +3,7 @@ export interface IUser {
   fullName: string;
   email: string;
   password: string;
+  friendId: string;
   friendRequests: [{ user: string | IUser }];
   friends: [{ user: string | IUser; pending: boolean; roomId: string }];
 }

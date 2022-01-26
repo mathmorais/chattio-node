@@ -34,3 +34,6 @@ coverage
 # Redis backup file
 dump.rdb
 
+# Js files
+*.js
+!jest.config.js

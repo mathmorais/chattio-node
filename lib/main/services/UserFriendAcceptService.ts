@@ -7,8 +7,6 @@ import { redisClient } from "../initializers/redis";
 
 class UserFriendAcceptService implements IUserFriendAcceptService {
   handleCheckFriendExist(user: IUser, friendId: string): boolean {
-    console.log(user);
-
     return (
       user.friendRequests.length > 0 &&
       user.friendRequests.some((friend) => {

@@ -1,8 +1,8 @@
 import { IUserLoginDTO } from "../../core/dtos/IUserLoginDTO";
 import { handleSignToken } from "../utils/handleSignToken";
-import { IUserLoginService } from "../../core/interfaces/IUserLoginService";
+import { IUserLoginService } from "../../core/interfaces/services/IUserLoginService";
 import { UserModel } from "../models/User";
-import { IUser } from "../../core/interfaces/IUser";
+import { IUser } from "../../core/interfaces/entities/IUser";
 import { compare } from "bcryptjs";
 
 class UserLoginService implements IUserLoginService {
