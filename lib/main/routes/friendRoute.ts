@@ -8,24 +8,24 @@ import { userFriendRequestService } from "../services/UserFriendRequestService";
 const friendRoute = express.Router();
 
 const userFriendRequestController = new UserFriendRequestController(
-  userFriendRequestService
+	userFriendRequestService
 );
 
 const userFriendAcceptController = new UserFriendAcceptController(
-  userFriendAcceptService
+	userFriendAcceptService
 );
 
 friendRoute.post(
-  "/request",
+	"/request",
 
-  checkIsAuthenticated,
-  userFriendRequestController.execute
+	checkIsAuthenticated,
+	userFriendRequestController.execute
 );
 
 friendRoute.post(
-  "/accept",
-  checkIsAuthenticated,
-  userFriendAcceptController.execute
+	"/accept",
+	checkIsAuthenticated,
+	userFriendAcceptController.execute
 );
 
 export { friendRoute };
