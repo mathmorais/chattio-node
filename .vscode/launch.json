@@ -1,12 +1,16 @@
 {
-  "configurations": [
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Launch File",
-      "program": "${workspaceFolder}/lib/index.ts",
-      "preLaunchTask": "tsc: build - tsconfig.json",
-      "outFiles": ["${workspaceFolder}/out/**/*.js"]
-    }
-  ]
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Launch index.ts",
+			"type": "node",
+			"request": "launch",
+			"runtimeArgs": ["-r", "ts-node/register"],
+			"env": {
+				"NODE_ENV": "development",
+				"MONGO_URL": "mongodb://root:root@localhost:27017"
+			},
+			"args": ["${workspaceFolder}/lib/index.ts"]
+		}
+	]
 }
