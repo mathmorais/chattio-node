@@ -1,29 +1,28 @@
 import { Request, Response } from "express";
-import { IUserFriendRequestService } from "../../core/interfaces/IUserFriendRequestService";
+import { IUserFriendRequestDTO } from "../../core/dtos/IUserFriendRequestDTO";
+import { IUserFriendRequestService } from "../../core/interfaces/services/IUserFriendRequestService";
 import { handleVerifyToken } from "../utils/handleVerifyToken";
 
 export class UserFriendRequestController {
-  private service: IUserFriendRequestService;
+	private service: IUserFriendRequestService;
 
-  constructor(implementation: IUserFriendRequestService) {
-    this.service = implementation;
-  }
+	constructor(implementation: IUserFriendRequestService) {
+		this.service = implementation;
+	}
 
-  execute = async (req: Request, res: Response): Promise<Response> => {
-    try {
-      const [_, token] = req.headers.authorization!.split(" ");
+	execute = async (req: Request, res: Response): Promise<Response> => {
+		try {
+			const [_, token] = req.headers.authorization!.split(" ");
 
-      const userId = handleVerifyToken<{ aud: string }>(token).aud;
-      const friendId = req.body.uid;
+			const userId = handleVerifyToken<{ aud: string }>(token).aud;
+			const { friendId } = req.body as IUserFriendRequestDTO;
 
-      console.log(userId, friendId);
+			await this.service.handleSendFriendRequest(userId, friendId);
 
-      await this.service.handleSendFriendRequest(userId, friendId);
-
-      return res.send({ code: "friendRequest.send" });
-    } catch (err) {
-      const errorCode = err instanceof Error ? err.message : "error.invalid";
-      return res.status(400).send({ errorCode });
-    }
-  };
+			return res.json({ code: "friend.requested" });
+		} catch (err) {
+			const errorCode = err instanceof Error ? err.message : "error.unknown";
+			return res.status(400).json({ errorCode });
+		}
+	};
 }

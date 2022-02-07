@@ -1,20 +1,31 @@
 import express from "express";
-import { UserFriendRequestController } from "../controllers/UserFriendRequestController";
 import { checkIsAuthenticated } from "../middlewares/chckIsAuthenticated";
+import { UserFriendAcceptController } from "../controllers/UserFriendAcceptController";
+import { UserFriendRequestController } from "../controllers/UserFriendRequestController";
+import { userFriendAcceptService } from "../services/UserFriendAcceptService";
 import { userFriendRequestService } from "../services/UserFriendRequestService";
 
 const friendRoute = express.Router();
 
 const userFriendRequestController = new UserFriendRequestController(
-  userFriendRequestService
+	userFriendRequestService
+);
+
+const userFriendAcceptController = new UserFriendAcceptController(
+	userFriendAcceptService
 );
 
 friendRoute.post(
-  "/request",
+	"/request",
 
-  checkIsAuthenticated,
-  userFriendRequestController.execute
+	checkIsAuthenticated,
+	userFriendRequestController.execute
 );
-friendRoute.post("/accept");
+
+friendRoute.post(
+	"/accept",
+	checkIsAuthenticated,
+	userFriendAcceptController.execute
+);
 
 export { friendRoute };

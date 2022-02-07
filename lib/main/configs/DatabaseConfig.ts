@@ -1,4 +1,4 @@
-import { MongoOptions } from "mongodb";
+import { ConnectOptions } from "mongoose";
 
 class DatabaseConfig {
   get url(): string {
@@ -9,7 +9,7 @@ class DatabaseConfig {
     return process.env.MONGO_URL;
   }
 
-  get options(): Partial<MongoOptions> | undefined {
+  get options(): Partial<ConnectOptions> | undefined {
     return { dbName: "chattio" };
   }
 }

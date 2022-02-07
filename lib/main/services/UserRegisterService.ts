@@ -2,10 +2,10 @@ import { IUserRegisterDTO } from "../../core/dtos/IUserRegisterDTO";
 import { handleSignToken } from "../utils/handleSignToken";
 import { hash } from "bcryptjs";
 import { bcryptConfig } from "../configs/BcryptConfig";
-import { IUserRegisterService } from "../../core/interfaces/IUserRegisterService";
+import { IUserRegisterService } from "../../core/interfaces/services/IUserRegisterService";
 import { UserModel } from "../models/User";
 import { redisClient } from "../initializers/redis";
-import { IUser } from "../../core/interfaces/IUser";
+import { IUser } from "../../core/interfaces/entities/IUser";
 
 class UserRegisterService implements IUserRegisterService {
   async handleCheckEmailAlreadyExist(email: string): Promise<boolean> {
